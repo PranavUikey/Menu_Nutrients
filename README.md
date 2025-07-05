@@ -59,25 +59,25 @@ pip install -r requirements.txt
 ```
 
 ### 4. Install Tesseract OCR
-    - **Ubuntu/Debian**
+**Ubuntu/Debian**
 
-        ```bash
-        sudo apt update
-        sudo apt install tesseract-ocr tesseract-ocr-hin tesseract-ocr-mar
-
-        ```
-
-    - **macOS (with Homebrew)**
     ```bash
-    brew install tesseract
+    sudo apt update
+    sudo apt install tesseract-ocr tesseract-ocr-hin tesseract-ocr-mar
+
     ```
 
-    - **Windows**
+**macOS (with Homebrew)**
+```bash
+brew install tesseract
+```
 
-    Download and install from:
-    https://github.com/tesseract-ocr/tesseract
+**Windows**
 
-    Ensure the executable path is added to the script:
+Download and install from:
+https://github.com/tesseract-ocr/tesseract
+
+Ensure the executable path is added to the script:
 
 
 ```python
