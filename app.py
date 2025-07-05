@@ -6,7 +6,10 @@ import io
 import json
 import re
 import os
+from dotenv import load_dotenv
 
+
+load_dotenv()
 # Set OpenRouter API credentials
 openai.api_key = os.getenv("OPENROUTER_API_KEY")
 openai.api_base = "https://openrouter.ai/api/v1"
@@ -54,7 +57,7 @@ if "ocr_text" not in st.session_state:
 if uploaded_file:
     file_bytes = uploaded_file.read()
     image = Image.open(io.BytesIO(file_bytes))
-    st.image(image, caption="Uploaded Menu", use_column_width=True)
+    st.image(image, caption="Uploaded Menu", use_container_width=True)
 
     if st.button("🧠 Extract Menu Items"):
         with st.spinner("🔍 Running OCR..."):
@@ -126,10 +129,10 @@ Only return valid JSON. No explanation or markdown.
                 # Dish Image (with fallback)
                 img_url = data.get("image_url", "")
                 if img_url and img_url.startswith("http"):
-                    st.image(img_url, caption=selected_dish, use_column_width=True)
+                    st.image(img_url, caption=selected_dish, use_container_width=True)
                 else:
                     st.warning("⚠️ No image found. Showing fallback.")
-                    st.image("https://via.placeholder.com/600x400?text=No+Image+Available", caption="No Image Available", use_column_width=True)
+                    st.image("https://via.placeholder.com/600x400?text=No+Image+Available", caption="No Image Available", use_container_width=True)
 
                 # Description
                 st.markdown(f"**📝 Description:** {data.get('description', '')}")
