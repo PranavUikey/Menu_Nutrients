@@ -1,6 +1,8 @@
 # Menu Analyzer (OCR + LLM with OpenRouter)
 
-This Streamlit-based application allows users to upload images of multilingual restaurant menus, extract dish names using Tesseract OCR, and generate detailed information about each dish using large language models through OpenRouter API.
+This Streamlit-based application allows users to upload images of multilingual restaurant menus, extract dish names using Tesseract OCR, and generate detailed information about each dish using large language models via the OpenRouter API.
+
+---
 
 ## Features
 
@@ -12,7 +14,9 @@ This Streamlit-based application allows users to upload images of multilingual r
   - Description
   - Ingredients
   - Nutrition facts (Calories, Protein, Fat, Carbs)
-  - Dish image (fetched from the internet or a fallback image)
+  - Dish image (fetched from the internet or fallback)
+
+---
 
 ## Tech Stack
 
@@ -21,19 +25,23 @@ This Streamlit-based application allows users to upload images of multilingual r
 - Tesseract OCR
 - OpenRouter API (LLM)
 - Pillow (PIL)
-- python-dotenv (for environment variables)
+- `python-dotenv` for environment variables
 - Regex, JSON
+
+---
 
 ## Project Structure
 
+```bash
 menu-analyzer/
 ├── app.py # Main application code
-├── .env # Contains API key (not pushed to Git)
+├── .env # Contains API key (ignored by Git)
 ├── requirements.txt # Python dependencies
 ├── .gitignore # Excludes .env and other untracked files
 └── README.md # Project documentation
+```
 
-
+---
 
 ## Setup Instructions
 
@@ -46,7 +54,8 @@ cd menu-analyzer
 
 ### 2. Set Up Virtual Environment
 
-```bash
+```
+bash
 python -m venv venv
 source venv/bin/activate       # On Linux/macOS
 venv\Scripts\activate          # On Windows
@@ -54,7 +63,8 @@ venv\Scripts\activate          # On Windows
 
 ### 3. Install Dependencies
 
-```bash
+```
+bash
 pip install -r requirements.txt
 ```
 
@@ -66,7 +76,9 @@ sudo apt update
 sudo apt install tesseract-ocr tesseract-ocr-hin tesseract-ocr-mar
 ```
 
+
 **macOS (with Homebrew)**
+
 ```bash
 brew install tesseract
 ```
@@ -76,48 +88,51 @@ brew install tesseract
 Download and install from:
 https://github.com/tesseract-ocr/tesseract
 
-Ensure the executable path is added to the script:
-
+Ensure the installation path is correct in your script:
 
 ```python
-
 pytesseract.pytesseract.tesseract_cmd = "/usr/bin/tesseract"
 ```
 
-
-Update path if different on your system.
+Update the path if it differs on your system.
 
 ### 5. Set Your API Key
-Create a .env file in the project root with the following:
+Create a .env file in the root directory with the following content:
 
-```ini
-
+```
+ini
 OPENROUTER_API_KEY=your_openrouter_key_here
 ```
 
-Make sure `.env` is not committed to Git. It's ignored via `.gitignore`.
+Your `.env` file is automatically excluded from Git via `.gitignore`.
+
 
 ### 6. Run the App
-```bash
+
+```
+bash
 streamlit run app.py
 ```
 
 ### Example Output
 
-**Input**
-    Image of a multilingual menu containing dishes in English, Hindi, or Marathi.
+**Input:**
+Image of a multilingual menu containing dishes in English, Hindi, or Marathi.
 
-**Extracted Output**
+**Extracted Dishes**
 
-```json
+```
+json
 
 ["Paneer Butter Masala", "Chicken Biryani", "Tandoori Roti"]
 ```
 
+
 **Dish Details**
 
-```json
 
+```
+json
 {
   "description": "A popular North Indian curry made with soft paneer cubes in a creamy tomato-based sauce.",
   "image_url": "https://example.com/paneer.jpg",
@@ -132,26 +147,27 @@ streamlit run app.py
 ```
 
 ### Future Scope
-    
-- PDF export for menu or dish reports
 
-- Option to manually correct OCR output before LLM parsing
+- Export dish reports or menu to PDF
 
-- Integration with nutrition databases (e.g., USDA)
+- Manual correction/editing of OCR output before LLM parsing
 
-- LLM fine-tuning or switching to local open-weight models
+- Integration with nutrition databases (e.g., USDA, FatSecret)
 
-- Support for handwritten menus or blurred images using image preprocessing
+- LLM fine-tuning or migration to open-weight local models
 
-- Option to view dish data in other Indian languages
+- Support for handwritten or low-quality menu images with preprocessing
 
-- Admin dashboard for reviewing extracted dish insights
+- Option to display dish details in additional Indian languages
 
-- QR code scanning for smart menus
+- Admin dashboard for monitoring and managing extracted dish insights
 
-- Mobile app version
+- Smart menu scanning using QR codes
+
+- Mobile-friendly version or companion app
+
 
 ### License
 
-This project is intended for personal, academic, and research purposes. Commercial usage is not allowed without permission.
-
+This project is open-source and intended for personal, academic, and research use only.
+For commercial use, please contact the project maintainer for permission.
