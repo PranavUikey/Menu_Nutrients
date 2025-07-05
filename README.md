@@ -61,11 +61,10 @@ pip install -r requirements.txt
 ### 4. Install Tesseract OCR
 **Ubuntu/Debian**
 
-    ```bash
-    sudo apt update
-    sudo apt install tesseract-ocr tesseract-ocr-hin tesseract-ocr-mar
-
-    ```
+```bash
+sudo apt update
+sudo apt install tesseract-ocr tesseract-ocr-hin tesseract-ocr-mar
+```
 
 **macOS (with Homebrew)**
 ```bash
