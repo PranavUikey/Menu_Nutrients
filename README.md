@@ -133,23 +133,23 @@ streamlit run app.py
 
 ### Future Scope
     
-    - PDF export for menu or dish reports
+- PDF export for menu or dish reports
 
-    - Option to manually correct OCR output before LLM parsing
+- Option to manually correct OCR output before LLM parsing
 
-    - Integration with nutrition databases (e.g., USDA)
+- Integration with nutrition databases (e.g., USDA)
 
-    - LLM fine-tuning or switching to local open-weight models
+- LLM fine-tuning or switching to local open-weight models
 
-    - Support for handwritten menus or blurred images using image preprocessing
+- Support for handwritten menus or blurred images using image preprocessing
 
-    - Option to view dish data in other Indian languages
+- Option to view dish data in other Indian languages
 
-    - Admin dashboard for reviewing extracted dish insights
+- Admin dashboard for reviewing extracted dish insights
 
-    - QR code scanning for smart menus
+- QR code scanning for smart menus
 
-    - Mobile app version
+- Mobile app version
 
 ### License
 
