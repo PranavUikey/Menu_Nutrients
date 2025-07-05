@@ -10,10 +10,11 @@ ocr = OCRProcessor()
 llm = LLMClient()
 
 st.set_page_config(page_title="Menu Analyzer", layout="wide")
-st.title("Menu Analyzer (OCR + LLM with OpenRouter)")
+st.title("Menu Analyzer (OCR + LLM)")
 
 uploaded_file = st.file_uploader("Upload a restaurant menu image", type=["jpg", "jpeg", "png"])
 
+# Initialize session state
 if "dishes" not in st.session_state:
     st.session_state.dishes = None
 if "ocr_text" not in st.session_state:
@@ -29,17 +30,18 @@ if uploaded_file:
 
         with st.spinner("Identifying dishes..."):
             prompt = f"""
-Extract and return only the dish names from this menu text. Ignore any prices, numbers, or currency symbols.
+Extract only the dish names from the following restaurant menu text.
 
-Only return a valid JSON array like:
-["Dish 1", "Dish 2", "Dish 3"]
-
-Do NOT include any explanation or markdown.
+- Ignore prices, numbers, and currency symbols like ₹, Rs, INR, etc.
+- Exclude any descriptions or section headers like "Main Course", "Soups", etc.
+- Return only dish names as a valid JSON array of strings.
+- No explanation, no markdown. Only a JSON array.
 
 Menu:
 {st.session_state.ocr_text}
 """
             dish_list_text = llm.query(prompt)
+
             if dish_list_text:
                 try:
                     dishes = extract_json_array(dish_list_text)
@@ -56,13 +58,13 @@ if st.session_state.dishes:
     if selected_dish:
         with st.spinner("Fetching dish details..."):
             detail_prompt = f"""
-Give the following details about the dish: "{selected_dish}".
+Provide details about the dish "{selected_dish}" in **valid JSON only**.
 
-Return a valid JSON object in this format:
+Required format:
 {{
-  "description": "Brief about the dish",
-  "image_url": "A valid image URL of the dish from the internet",
-  "ingredients": ["item1", "item2", "..."],
+  "description": "...",
+  "image_url": "https://...",
+  "ingredients": ["item1", "item2", "..."],  # Ensure list is closed properly
   "nutrition": {{
     "calories": "... kcal",
     "protein": "... g",
@@ -71,8 +73,10 @@ Return a valid JSON object in this format:
   }}
 }}
 
-Only return valid JSON. No explanation or markdown.
+Do not explain or add extra text. Only output JSON.
+Ensure all brackets and quotes are closed properly.
 """
+
             detail_text = llm.query(detail_prompt)
             try:
                 data = extract_json_object(detail_text)

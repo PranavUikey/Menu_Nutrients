@@ -1,6 +1,5 @@
 streamlit
 pillow
 pytesseract
-requests
-openai==0.28
-dotenv
+huggingface-hub
+python-dotenv
