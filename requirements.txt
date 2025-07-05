@@ -1,0 +1,5 @@
+streamlit
+pillow
+pytesseract
+requests
+openai==0.28
